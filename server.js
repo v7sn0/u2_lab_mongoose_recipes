@@ -16,6 +16,8 @@ dns.setServers(["8.8.8.8", "1.1.1.1"])
 
 const db = require("./db")
 
+const middleware = require("./middleware")
+
 const PORT = process.env.PORT ? process.env.PORT : 3000
 
 const app = express()
@@ -37,12 +39,14 @@ app.use(
   })
 )
 
+app.use(middleware.passUserToView)
 app.use("/auth", authRouter)
 app.use("/users", userRouter)
 app.use("/recipes", recipeRouter)
 
 app.get("/", (req, res) => {
-  res.send("Mongoose Recipes is waiting . . .")
+  // res.send("Mongoose Recipes is waiting . . .")
+  res.render("index.ejs")
 })
 
 app.listen(PORT, () => {

@@ -22,7 +22,8 @@ const registerUser = async (req, res) => {
       picture: req.body.picture,
     })
 
-    res.send("Signed up successfully.")
+    // res.send("Signed up successfully.")
+    res.render("./auth/thanks.ejs")
   } catch (error) {
     console.error("Error in signing up ", error.message)
   }
@@ -47,7 +48,8 @@ const signInUser = async (req, res) => {
     }
 
     req.session.save(() => {
-      res.send(`Thanks for signing in ${user.first}`)
+      // res.send(`Thanks for signing in ${user.first}`)
+      res.redirect(`/users/${user._id}`)
     })
   } catch (error) {
     console.error("Error in signing in ", error.message)
@@ -88,7 +90,8 @@ const updatePassword = async (req, res) => {
     user.password = hashedPassword
     await user.save()
 
-    res.send("Password updated successfully")
+    // res.send("Password updated successfully")
+    res.render("./auth/confirm.ejs")
   } catch (error) {
     console.error("Error in updating password ", error.message)
   }

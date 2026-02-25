@@ -13,7 +13,8 @@ const getUserById = async (req, res) => {
       recipes: recipes,
     }
 
-    res.send(data)
+    // res.send(data)
+    res.render("./users/profile.ejs", { user: data })
   } catch (error) {
     console.error("Error in getting user information ", error.message)
   }
